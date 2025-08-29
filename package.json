@@ -1,0 +1,22 @@
+{
+  "name": "ecosnap",
+  "version": "1.0.0",
+  "description": "Hackathon project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Achintyabhardwaj/Ecosnap.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Achintyabhardwaj/Ecosnap/issues"
+  },
+  "homepage": "https://github.com/Achintyabhardwaj/Ecosnap#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
