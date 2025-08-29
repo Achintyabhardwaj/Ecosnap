@@ -1,0 +1,2 @@
+# Ecosnap
+Hackathon project
