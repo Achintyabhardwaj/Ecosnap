@@ -1,5 +1,6 @@
 # Ecosnap
 ECOSNAP (Plastic Packaging Impact Analyzer)
+
 📌 Problem
 
 Consumers often struggle to understand how eco-friendly a product’s packaging is, especially while shopping online/offline. This prevents them from making sustainable choices.
@@ -17,17 +18,18 @@ Analyzes packaging impact with ML & NLP models
 Provides users with a sustainability score & eco-friendly alternatives
 
 🛠️ Tech Stack
-Frontend (Mobile)
+
+1.Frontend (Mobile)
 
 Flutter / React Native
 
-Backend
+2.Backend
 
 Node.js + Express
 
 MongoDB (database)
 
-ML & Image Recognition
+3.ML & Image Recognition
 
 Google ML Kit
 
@@ -37,7 +39,7 @@ OpenCV
 
 NLP with Python (spaCy / BERT)
 
-APIs Integrated
+4.APIs Integrated
 
 Amazon Product Advertising API
 
