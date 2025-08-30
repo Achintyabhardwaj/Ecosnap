@@ -7,7 +7,7 @@ Consumers often struggle to understand how eco-friendly a product’s packaging 
 
 💡 Solution
 
-A mobile app + backend + ML/NLP system that:
+A website + backend + ML/NLP system that:
 
 Scans barcodes / product images
 
@@ -19,9 +19,9 @@ Provides users with a sustainability score & eco-friendly alternatives
 
 🛠️ Tech Stack
 
-1.Frontend (Mobile)
+1.Frontend (web)
 
-Flutter / React Native
+React.js
 
 2.Backend
 
