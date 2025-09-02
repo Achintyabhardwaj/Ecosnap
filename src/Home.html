@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSnap - Track Plastic Impact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>EcoSnap 🌱</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Features</a>
+      <a href="#">Impact</a>
+      <a href="#">Leaderboard</a>
+    </nav>
+    <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" data-aos="fade-up">
+    <div>
+      <h2>Track Plastic Packaging Impact</h2>
+      <p>Scan barcodes, track your eco-score, and join the movement for a greener planet.</p>
+      <button class="btn">Get Started</button>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stat-box" data-aos="zoom-in">
+      <h3 id="plastic">0</h3>
+      <p>Plastic Saved (kg)</p>
+    </div>
+    <div class="stat-box" data-aos="zoom-in">
+      <h3 id="trees">0</h3>
+      <p>Trees Planted</p>
+    </div>
+    <div class="stat-box" data-aos="zoom-in">
+      <h3 id="coins">0</h3>
+      <p>Coins Earned</p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-item" data-aos="flip-left">🌍 Global Eco Ranking</div>
+      <div class="feature-item" data-aos="flip-left">📦 Track Packaging Impact</div>
+      <div class="feature-item" data-aos="flip-left">🤝 User + Manufacturer Collaboration</div>
+      <div class="feature-item" data-aos="flip-left">💡 Suggest Eco Alternatives</div>
+    </div>
+  </section>
+
+  <!-- Carbon Calculator -->
+  <section class="calculator">
+    <h2>Carbon Footprint Calculator</h2>
+    <p>Find out your daily carbon footprint based on your lifestyle.</p>
+    <div class="calc-box">
+      <input type="number" id="travel" placeholder="Daily Travel (km)">
+      <input type="number" id="plasticUse" placeholder="Plastic Use (items)">
+      <input type="number" id="electricity" placeholder="Electricity (kWh)">
+      <button onclick="calculateCarbon()">Calculate</button>
+    </div>
+    <h3 id="carbonResult">Your Carbon Footprint: 0 kg CO₂/day</h3>
+  </section>
+
+  <!-- Rewards & Leaderboard -->
+  <section class="rewards">
+    <h2>Rewards & Leaderboard</h2>
+    <p>Earn coins for eco-friendly actions and climb the leaderboard!</p>
+
+    <!-- Input Form -->
+    <div class="form-box">
+      <input type="text" id="username" placeholder="Enter your name">
+      <input type="number" id="usercoins" placeholder="Enter coins">
+      <button onclick="addToLeaderboard()">Submit</button>
+    </div>
+
+    <!-- Leaderboard Table -->
+    <div class="leaderboard" data-aos="fade-up">
+      <table id="leaderboardTable">
+        <tr><th>Rank</th><th>User</th><th>Coins</th></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="achievements">
+    <h2>Achievements & Badges</h2>
+    <div class="badge-grid">
+      <div class="badge">🥉 Plastic Buster <p>(10 scans)</p></div>
+      <div class="badge">🥈 Eco Hero <p>(50 scans)</p></div>
+      <div class="badge">🥇 Green Legend <p>(100 scans)</p></div>
+    </div>
+    <p id="badgeMsg">Unlock badges by scanning products!</p>
+  </section>
+
+  <!-- Chart -->
+  <section class="chart-section">
+    <h2>Your Eco Score</h2>
+    <canvas id="ecoChart"></canvas>
+  </section>
+
+  <!-- Future Vision -->
+  <section class="future">
+    <h2>🚀 Future Vision</h2>
+    <p>EcoSnap will use <b>AI & AR</b> to identify plastic just by pointing your camera,  
+       and show you real-time impact of your choices.</p>
+    <img src="https://images.unsplash.com/photo-1618477247222-bcae0a853bd1" alt="Future Tech" />
+  </section>
+
+  <footer>
+    <p>© 2025 EcoSnap. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="Home.js"></script>
+  <link rel="stylesheet" href="Home.css">
+</body>
+</html>
