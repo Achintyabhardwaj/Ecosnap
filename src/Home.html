@@ -6,26 +6,34 @@
   <title>EcoSnap - Track Plastic Impact</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/@zxing/library@latest"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
   <header>
     <h1>EcoSnap 🌱</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Features</a>
-      <a href="#">Impact</a>
-      <a href="#">Leaderboard</a>
+      <a href="#home">Home</a>
+      <a href="#features">Features</a>
+      <a href="#barcode">Barcode</a>
+      <a href="#impact">Impact</a>
+      <a href="#leaderboard">Leaderboard</a>
     </nav>
     <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
   </header>
 
   <!-- Hero -->
-  <section class="hero" data-aos="fade-up">
-    <div>
+  <section id="home" class="hero">
+    <div class="hero-text" data-aos="fade-right">
       <h2>Track Plastic Packaging Impact</h2>
       <p>Scan barcodes, track your eco-score, and join the movement for a greener planet.</p>
       <button class="btn">Get Started</button>
+    </div>
+    <div class="hero-img" data-aos="fade-left">
+      <img src="https://hips.hearstapps.com/hmg-prod/images/best-eco-friendly-apps-2023-640f1e81e6c8c.jpg?crop=0.910xw:1.00xh;0.0472xw,0&resize=1200:*" 
+           alt="Eco App Illustration">
     </div>
   </section>
 
@@ -46,7 +54,7 @@
   </section>
 
   <!-- Features -->
-  <section class="features">
+  <section id="features" class="features">
     <h2>Features</h2>
     <div class="feature-grid">
       <div class="feature-item" data-aos="flip-left">🌍 Global Eco Ranking</div>
@@ -56,32 +64,106 @@
     </div>
   </section>
 
-  <!-- Carbon Calculator -->
-  <section class="calculator">
-    <h2>Carbon Footprint Calculator</h2>
-    <p>Find out your daily carbon footprint based on your lifestyle.</p>
-    <div class="calc-box">
-      <input type="number" id="travel" placeholder="Daily Travel (km)">
-      <input type="number" id="plasticUse" placeholder="Plastic Use (items)">
-      <input type="number" id="electricity" placeholder="Electricity (kWh)">
-      <button onclick="calculateCarbon()">Calculate</button>
+  <!-- Barcode Section -->
+<section id="barcode" class="barcode">
+  <div class="barcode-card">
+    <h2>📷 Scan or Enter Barcode</h2>
+    <p>Find out the plastic impact of food packaging by scanning or entering its barcode.</p>
+    
+    <!-- Manual Input -->
+    <div class="barcode-input">
+      <input type="text" id="barcodeText" placeholder="Enter Barcode">
+      <button class="btn-submit" onclick="processBarcode()">
+        <i class="fa-solid fa-check"></i> Submit
+      </button>
     </div>
-    <h3 id="carbonResult">Your Carbon Footprint: 0 kg CO₂/day</h3>
+
+    <!-- Camera Scanner -->
+    <div class="barcode-scanner">
+      <button class="btn-camera" onclick="startScanner()">
+        <i class="fa-solid fa-camera"></i> Start Camera Scanner
+      </button>
+      <div class="camera-preview">
+        <video id="scannerPreview" autoplay></video>
+      </div>
+      <p id="barcodeResult"></p>
+    </div>
+  </div>
+</section>
+
+
+      <!-- Social Sharing -->
+      <div class="social-share">
+        <p>🔗 Share your scan:</p>
+        <i class="fa-brands fa-twitter" style="color:#1DA1F2;" onclick="shareOnTwitter(document.getElementById('barcodeResult').innerText)"></i>
+        <i class="fa-brands fa-whatsapp" style="color:#25D366;" onclick="shareOnWhatsApp(document.getElementById('barcodeResult').innerText)"></i>
+        <i class="fa-brands fa-facebook" style="color:#1877F2;" onclick="shareOnFacebook(document.getElementById('barcodeResult').innerText)"></i>
+        <i class="fa-brands fa-linkedin" style="color:#0077B5;" onclick="shareOnLinkedIn(document.getElementById('barcodeResult').innerText)"></i>
+        <i class="fa-brands fa-instagram" style="color:#E4405F;" onclick="alert('Instagram requires screenshot/manual post 📸')"></i>
+      </div>
+
+      <!-- Packaging Breakdown Visual -->
+      <div id="packagingBreakdown" class="packaging-breakdown" style="display:none;">
+        <h3>📊 Packaging Breakdown</h3>
+        <div class="bar">
+          <span>Plastic</span>
+          <div class="progress"><div id="plasticBar"></div></div>
+        </div>
+        <div class="bar">
+          <span>Paper</span>
+          <div class="progress"><div id="paperBar"></div></div>
+        </div>
+        <div class="bar">
+          <span>Glass</span>
+          <div class="progress"><div id="glassBar"></div></div>
+        </div>
+        <div class="bar">
+          <span>Metal</span>
+          <div class="progress"><div id="metalBar"></div></div>
+        </div>
+      </div>
+
+      <h3>📜 History</h3>
+      <ul id="barcodeHistory"></ul>
+      <div id="alternativeResult" class="alternative-box"></div>
+    </div>
   </section>
 
   <!-- Rewards & Leaderboard -->
-  <section class="rewards">
-    <h2>Rewards & Leaderboard</h2>
+<section id="leaderboard" class="rewards">
+  <div class="leaderboard-card">
+    <h2>🏆 Rewards & Leaderboard</h2>
     <p>Earn coins for eco-friendly actions and climb the leaderboard!</p>
 
-    <!-- Input Form -->
+    <!-- Form -->
+    <div class="form-box">
+      <input type="text" id="username" placeholder="Enter your name">
+      <input type="number" id="usercoins" placeholder="Enter coins">
+      <button class="btn-submit" onclick="addToLeaderboard()">
+        <i class="fa-solid fa-circle-plus"></i> Submit
+      </button>
+    </div>
+
+    <!-- Leaderboard Table -->
+    <div class="leaderboard" data-aos="fade-up">
+      <table id="leaderboardTable">
+        <tr>
+          <th>Rank</th>
+          <th>User</th>
+          <th>Coins</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+
     <div class="form-box">
       <input type="text" id="username" placeholder="Enter your name">
       <input type="number" id="usercoins" placeholder="Enter coins">
       <button onclick="addToLeaderboard()">Submit</button>
     </div>
 
-    <!-- Leaderboard Table -->
     <div class="leaderboard" data-aos="fade-up">
       <table id="leaderboardTable">
         <tr><th>Rank</th><th>User</th><th>Coins</th></tr>
@@ -89,29 +171,21 @@
     </div>
   </section>
 
-  <!-- Achievements -->
-  <section class="achievements">
-    <h2>Achievements & Badges</h2>
-    <div class="badge-grid">
-      <div class="badge">🥉 Plastic Buster <p>(10 scans)</p></div>
-      <div class="badge">🥈 Eco Hero <p>(50 scans)</p></div>
-      <div class="badge">🥇 Green Legend <p>(100 scans)</p></div>
-    </div>
-    <p id="badgeMsg">Unlock badges by scanning products!</p>
-  </section>
-
-  <!-- Chart -->
-  <section class="chart-section">
-    <h2>Your Eco Score</h2>
-    <canvas id="ecoChart"></canvas>
-  </section>
-
   <!-- Future Vision -->
-  <section class="future">
+  <section id="impact" class="future">
     <h2>🚀 Future Vision</h2>
     <p>EcoSnap will use <b>AI & AR</b> to identify plastic just by pointing your camera,  
        and show you real-time impact of your choices.</p>
     <img src="https://images.unsplash.com/photo-1618477247222-bcae0a853bd1" alt="Future Tech" />
+  </section>
+    
+  <!-- Eco Tips -->
+  <section class="eco-tips">
+    <h2>💡 Eco Tips</h2>
+    <div class="tips-container">
+      <p id="tipText">Loading tips...</p>
+      <button onclick="nextTip()">➡️ Next</button>
+    </div>
   </section>
 
   <footer>
@@ -119,7 +193,6 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="Home.js"></script>
-  <link rel="stylesheet" href="Home.css">
+  <script src="script.js"></script>
 </body>
 </html>
